@@ -390,3 +390,9 @@ enum LogSource {
   // Represents the device for debugging.
   DEBUG_DEVICES = 5;
 }
+
+// The client of NearbyConnections
+enum ConnectionsClientType {
+  CONNECTIONS_CLIENT_UNKNOWN = 0;
+  CONNECTIONS_CLIENT_SHARING = 1;
+}
