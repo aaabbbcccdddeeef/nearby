@@ -91,9 +91,11 @@ message ConnectionRequestFrame {
   optional int32 keep_alive_interval_millis = 8;
   optional int32 keep_alive_timeout_millis = 9;
   // The type of {@link Device} object.
-  optional int32 device_type = 10 [default = 0];
+  optional int32 device_type = 10 [default = 0, deprecated = true];
   // The bytes of serialized {@link Device} object.
-  optional bytes device_info = 11;
+  optional bytes device_info = 11 [deprecated = true];
+  // Represents the data of a {@link Device}
+  optional DeviceData device_data = 12;
 }
 
 message ConnectionResponseFrame {
@@ -372,4 +374,41 @@ message LocationStandard {
     // https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
     ISO_3166_1_ALPHA_2 = 2;
   }
+}
+
+message RepeatedInt32 {
+  repeated int32 value = 1 [packed = true];
+}
+
+message DeviceData {
+  enum EndpointType {
+    UNKNOWN_ENDPOINT = 0;
+    CONNECTIONS_ENDPOINT = 1;
+    PRESENCE_ENDPOINT = 2;
+  }
+
+  enum DeviceType {
+    UNKNOWN = 0;
+    PHONE = 1;
+    TABLET = 2;
+    DISPLAY = 3;
+    LAPTOP = 4;
+    TV = 5;
+    WATCH = 6;
+  }
+
+  // Essential/ConnectionsDevice data.
+  optional string endpoint_id = 1;
+  optional EndpointType endpoint_type = 2;
+  optional bytes endpoint_info = 3;
+  optional bytes connectivity_info_list = 4;  // In Data Element format.
+
+  // PresenceDevice data.
+  optional int64 device_id = 5;
+  optional string device_name = 6;
+  optional DeviceType device_type = 7;
+  optional string device_image_url = 8;
+  optional int64 discovery_timestamp_millis = 9;
+  optional RepeatedInt32 actions = 10;
+  optional int64 identity_type = 11;
 }
