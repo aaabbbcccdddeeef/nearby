@@ -19,6 +19,7 @@ cc_library(
         "wininet.lib",
         "advapi32.lib",
         "bcrypt.lib",
+        "cfgmgr32.lib",
         "comdlg32.lib",
         "gdi32.lib",
         "kernel32.lib",
@@ -40,10 +41,11 @@ cc_library(
     ],
     textual_hdrs = glob(["**/*.h"]),
     visibility = [
+        "//location/nearby/apps/better_together/windows:__subpackages__",
+        # "//third_party/intel/pie:__subpackages__",
         "//connections/windows:__subpackages__",
         "//fastpair:__subpackages__",
         "//internal:__subpackages__",
         "//internal/platform/implementation/windows:__subpackages__",
-        "//location/nearby/apps/better_together/windows:__subpackages__",
     ],
 )
