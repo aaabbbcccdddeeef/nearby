@@ -2,15 +2,20 @@ cc_library(
     name = "weave",
     srcs = [
         "packet.cc",
+        "packet_sequence_number_generator.cc",
         "packetizer.cc",
     ],
     hdrs = [
         "packet.h",
+        "packet_sequence_number_generator.h",
         "packetizer.h",
+        "single_packet_write_request.h",
+        "write_request.h",
     ],
     deps = [
         "//internal/platform:base",
         "//internal/platform:types",
+        "@com_google_absl//absl/base:core_headers",
         "@com_google_absl//absl/status",
         "@com_google_absl//absl/status:statusor",
         "@com_google_absl//absl/strings",
@@ -34,6 +39,19 @@ cc_test(
 )
 
 cc_test(
+    name = "packet_sequence_number_generator_test",
+    srcs = [
+        "packet_sequence_number_generator_test.cc",
+    ],
+    deps = [
+        ":weave",
+        "//internal/platform/implementation/g3",  # build_cleaner: keep
+        "@com_github_protobuf_matchers//protobuf-matchers",
+        "@com_google_googletest//:gtest_main",
+    ],
+)
+
+cc_test(
     name = "packetizer_test",
     srcs = [
         "packetizer_test.cc",
@@ -43,6 +61,19 @@ cc_test(
         "//internal/platform/implementation/g3",  # build_cleaner: keep
         "@com_github_protobuf_matchers//protobuf-matchers",
         "@com_google_absl//absl/status",
+        "@com_google_googletest//:gtest_main",
+    ],
+)
+
+cc_test(
+    name = "single_packet_write_request_test",
+    srcs = [
+        "single_packet_write_request_test.cc",
+    ],
+    deps = [
+        ":weave",
+        "//internal/platform/implementation/g3",  # build_cleaner: keep
+        "@com_github_protobuf_matchers//protobuf-matchers",
         "@com_google_googletest//:gtest_main",
     ],
 )
