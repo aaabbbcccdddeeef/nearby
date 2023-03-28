@@ -19,9 +19,11 @@
 #include <optional>
 #include <ostream>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "absl/container/flat_hash_map.h"
+#include "fastpair/common/account_key.h"
 #include "fastpair/common/protocol.h"
 
 namespace nearby {
@@ -67,13 +69,9 @@ class FastPairDevice {
     version_ = version;
   }
 
-  std::optional<std::vector<uint8_t>> account_key() const {
-    return account_key_;
-  }
+  const AccountKey& GetAccountKey() const { return account_key_; }
 
-  void set_account_key(std::vector<uint8_t> account_key) {
-    account_key_ = account_key;
-  }
+  void SetAccountKey(AccountKey account_key) { account_key_ = account_key; }
 
   absl::string_view GetModelId() const { return model_id_; }
 
@@ -107,7 +105,7 @@ class FastPairDevice {
   // Account key which will be saved to the user's account during Fast Pairing
   // for eligible devices (V2 or higher) and used for detecting subsequent
   // pairing scenarios.
-  std::optional<std::vector<uint8_t>> account_key_;
+  AccountKey account_key_;
 };
 
 std::ostream& operator<<(std::ostream& stream, const FastPairDevice& device);
