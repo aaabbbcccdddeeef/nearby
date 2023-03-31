@@ -25,10 +25,17 @@
 #include "absl/status/status.h"
 #include "absl/strings/string_view.h"
 #include "absl/time/time.h"
+#ifdef NEARBY_CHROMIUM
+#include "crypto/aead.h"
+#include "crypto/ec_private_key.h"
+#include "crypto/hkdf.h"
+#include "crypto/random.h"
+#else
 #include "internal/crypto/aead.h"
 #include "internal/crypto/ec_private_key.h"
 #include "internal/crypto/hkdf.h"
 #include "internal/crypto/random.h"
+#endif
 #include "internal/platform/base64_utils.h"
 #include "internal/platform/future.h"
 #include "internal/platform/implementation/credential_callbacks.h"

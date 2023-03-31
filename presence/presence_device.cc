@@ -17,7 +17,11 @@
 #include <string>
 #include <vector>
 
+#ifdef NEARBY_CHROMIUM
+#include "crypto/random.h"
+#else
 #include "internal/crypto/random.h"
+#endif
 #include "internal/platform/ble_connection_info.h"
 #include "internal/platform/implementation/system_clock.h"
 #include "presence/device_motion.h"

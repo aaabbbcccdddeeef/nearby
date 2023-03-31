@@ -23,7 +23,11 @@
 #include <vector>
 
 #include "absl/time/time.h"
+#ifdef NEARBY_CHROMIUM
+#include "crypto/random.h"
+#else
 #include "internal/crypto/random.h"
+#endif
 #include "internal/platform/implementation/system_clock.h"
 #include "internal/platform/logging.h"
 #include "presence/implementation/advertisement_factory.h"

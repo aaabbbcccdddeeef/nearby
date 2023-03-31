@@ -19,7 +19,11 @@
 
 #include "absl/status/status.h"
 #include "absl/strings/string_view.h"
+#ifdef NEARBY_CHROMIUM
+#include "crypto/random.h"
+#else
 #include "internal/crypto/random.h"
+#endif
 #include "internal/platform/logging.h"
 #include "presence/broadcast_request.h"
 #include "presence/implementation/action_factory.h"

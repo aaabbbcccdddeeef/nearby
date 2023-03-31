@@ -23,7 +23,11 @@
 
 #include "absl/status/status.h"
 #include "absl/types/variant.h"
+#ifdef NEARBY_CHROMIUM
+#include "crypto/random.h"
+#else
 #include "internal/crypto/random.h"
+#endif
 #include "internal/platform/future.h"
 #include "internal/platform/implementation/ble_v2.h"
 #include "internal/platform/implementation/credential_callbacks.h"
