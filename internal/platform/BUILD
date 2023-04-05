@@ -395,7 +395,10 @@ cc_library(
         "wifi_lan.h",
         "wifi_utils.h",
     ],
-    copts = ["-DCORE_ADAPTER_DLL"] + ["-DNO_WEBRTC"],
+    copts = [
+        "-DCORE_ADAPTER_DLL",
+        "-DNO_WEBRTC",
+    ],
     visibility = [
         "//connections:__subpackages__",
         "//fastpair:__subpackages__",
@@ -412,18 +415,15 @@ cc_library(
         "//internal/base",
         "//internal/platform/implementation:comm",
         "//internal/platform/implementation:platform",
+        "//third_party/webrtc/files/stable/webrtc/api:create_peerconnection_factory",  # buildcleaner: keep
+        "//third_party/webrtc/files/stable/webrtc/api:libjingle_peerconnection_api",
         "@com_google_absl//absl/container:flat_hash_map",
         "@com_google_absl//absl/container:flat_hash_set",
         "@com_google_absl//absl/functional:any_invocable",
         "@com_google_absl//absl/status",
         "@com_google_absl//absl/strings",
         "@com_google_absl//absl/types:optional",
-    ] + select({
-        "@platforms//cpu:arm": [],
-        "//conditions:default": [
-            # TODO: Support WebRTC
-        ],
-    }),
+    ],
 )
 
 cc_test(
