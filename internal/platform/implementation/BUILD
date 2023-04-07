@@ -31,6 +31,7 @@ cc_library(
         "log_message.h",
         "mutex.h",
         "output_file.h",
+        "preferences_repository.h",
         "scheduled_executor.h",
         "settable_future.h",
         "submittable_executor.h",
@@ -49,6 +50,7 @@ cc_library(
     ],
     deps = [
         "//internal/platform:base",
+        "//third_party/json",
         "@com_google_absl//absl/base:core_headers",
         "@com_google_absl//absl/functional:any_invocable",
         "@com_google_absl//absl/strings",
